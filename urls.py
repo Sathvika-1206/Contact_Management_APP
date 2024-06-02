@@ -1,20 +1,17 @@
-
-#this is the collection of urls
-#here present all the routing urls 
-from django.contrib import admin
+#just to handle all the urls for the base app
+#we need to import path function that what triggers the entire url
 from django.urls import path
-from django.urls import include #include is used to get connection from other apps
-# remember to import by having the syntax from django.http<that is the http> import HttpResponse
+# urls need to have a connection with the view as well
+from . import views
 
-#this url is for the full project
-#url are the ones which trigger the views
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    #we need to specify a path i.e the core path ""
-    #ideat include base.urls . not the / that is only for templates include base.urls
-    path('',include('base.urls')),
-    #u need to give it another ' '
-    
+# we need to have python list to store all the urls
+urlpatterns=[
+  #path function have three value
+  path('',views.home,name='home'),
+  #always end with commas
+  #to have dynamic input
+  path('room/<str:pk>/',views.room,name='room'),
+  path('forms/',views.createRoom,name='createRoom'),
+  path('forms/<str:pk>/',views.updateRoom,name='updateRoom'),
+  path('delete/<str:pk>/',views.deleteRoom,name='deleteRoom'),
 ]
